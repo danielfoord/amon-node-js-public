@@ -239,6 +239,11 @@ const Utils = {
 
     return str;
   },
+  getDateDifference(date) {
+    const startDate = moment(new Date());
+    const endDate = moment(date);
+    return startDate.diff(endDate, 'hours');
+  },
 };
 
 module.exports = Utils;

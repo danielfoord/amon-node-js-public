@@ -22,10 +22,12 @@ describe('Model:coin', () => {
     const coin = await Models.Coin.create({
       name: 'Bitcoin Cash',
       code: 'BCH',
+      price: '23456',
     });
 
     expect(coin.name).to.eq('Bitcoin Cash');
     expect(coin.code).to.eq('BCH');
+    expect(coin.price).to.eq('23456');
   });
 
   it('Should find by coinCode', async () => {
@@ -34,11 +36,20 @@ describe('Model:coin', () => {
 
     expect(coin.id).to.eq(this.coin.id);
   });
-
+  it('Should update coin by Id', async () => {
+    const coinId = this.coin.id;
+    const price = '23568';
+    const updatedAt = new Date();
+    const coin = await Models.Coin.updateCoinData(coinId, price, updatedAt);
+    expect(coin.name).to.eq(this.coin.name);
+    expect(coin.code).to.eq(this.coin.code);
+    expect(coin.price).to.eq('23568');
+  });
   it('Should filterKeys', async () => {
     const coin = await Models.Coin.create({
       name: 'Amon',
       code: 'AMN',
+      price: '25963',
     });
 
     const filterCoin = coin.filterKeys();

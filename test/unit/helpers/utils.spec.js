@@ -111,6 +111,13 @@ describe('Helpers: Utils', () => {
       expect(dates.length).to.eq(3);
     });
   });
+  describe('Get Date difference between two dates', () => {
+    it('get difference by hours', () => {
+      const endDate = moment().subtract(3, 'hours').format();
+      const hoursPassed = Utils.getDateDifference(endDate);
+      expect(hoursPassed).to.eq(3);
+    });
+  });
 
   describe('setIntervalAsync', () => {
     it('repeats', async () => {
