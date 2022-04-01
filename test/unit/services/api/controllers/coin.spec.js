@@ -48,8 +48,23 @@ describe('Controller: Coin', () => {
       if (hoursPassed >= 1) {
         const stub = sinon.stub(axios, 'get').callsFake(() => Promise.resolve({ status: 200 }));
         const test = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinCode}`);
+        console.log(test, 11111111111);
         assert.deepEqual(test, { status: 200 }); // passes
         assert.strictEqual(stub.callCount, 1);
+      }
+    });
+    it('it should return original coin object if updatedTime not exceeded one hour', async () => {
+      const coinCode = 'BTC';
+      const coin = await CoinController.getCoinByCode(coinCode);
+      const coinData = { price: '12345', name: 'Bitcoin', code: 'BTC' };
+
+      const coinUpdatedAt = new Date();
+      const hoursPassed = moment(new Date()).diff(coinUpdatedAt, 'hours');
+
+      if (hoursPassed < 1) {
+        expect(coin.code).to.eq(coinData.code);
+        expect(coin.name).to.eq(coinData.name);
+        expect(coin.price).to.eq(coinData.price);
       }
     });
   });
