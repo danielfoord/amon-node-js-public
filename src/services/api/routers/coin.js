@@ -46,6 +46,16 @@ const CoinRouter = {
      *
      */
     router.get('/:coinCode', CoinRouter.getCoinByCode);
+
+    /**
+     * @api {put} / PUT createCoin
+     * @apiName coinCode
+     * @apiGroup Status
+     * @apiDescription Put coinCode
+     *
+     * @apiSampleRequest /
+     *
+     */
     router.put('/createCoin', CoinRouter.addCoinData);
 
     return router;

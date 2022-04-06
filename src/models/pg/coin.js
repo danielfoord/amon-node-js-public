@@ -1,5 +1,5 @@
 const { v4: uuid } = require('uuid');
-const { pick } = require('lodash');
+const { pick, now } = require('lodash');
 
 module.exports = function (sequelize, DataTypes) {
   const Coin = sequelize.define(
@@ -22,6 +22,11 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      priceUpdatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: now(),
+      },
     },
     {
       freezeTableName: true,
@@ -31,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
 
   Coin.prototype.filterKeys = function () {
     const obj = this.toObject();
-    const filtered = pick(obj, 'price', 'name', 'code');
+    const filtered = pick(obj, 'price', 'name', 'code', 'priceUpdatedAt');
 
     return filtered;
   };
@@ -48,7 +53,7 @@ module.exports = function (sequelize, DataTypes) {
   Coin.updateCoinData = async function (id, price, updatedAt) {
     const coin = await Coin.findByPk(id);
     coin.price = price;
-    coin.updatedAt = updatedAt;
+    coin.priceUpdatedAt = updatedAt;
     coin.save();
     return Coin.findByPk(id);
   };

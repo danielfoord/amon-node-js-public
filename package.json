@@ -25,7 +25,8 @@
     "db:migrate:create": "sequelize migration:create --migrations-path src/models/pg/migrations/  --name",
     "wait:migrate": "test/scripts/waitDown.sh migrate",
     "wait:db": "test/scripts/waitUp.sh db 5432",
-    "wait:api": "test/scripts/waitUp.sh service-api 3000"
+    "wait:api": "test/scripts/waitUp.sh service-api 3000",
+    "dev": "nodemon runners/api"
   },
   "engines": {
     "node": "16.x",
@@ -81,6 +82,7 @@
     "moment": "^2.29.1",
     "moment-range": "^4.0.2",
     "node-rsa": "^1.1.1",
+    "nodemon": "^2.0.15",
     "nonce": "^1.0.4",
     "nyc": "^15.1.0",
     "pg": "^8.7.1",

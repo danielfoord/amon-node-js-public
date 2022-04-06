@@ -5,7 +5,8 @@
       "id": "26a05507-0395-447a-bbbb-000000000000",
       "name": "Bitcoin",
       "code": "BTC",
-      "price": "12345"
+      "price": "12345",
+      "priceUpdatedAt": "2022-04-04T01:08:35.556Z"
     }
   },
   {
@@ -14,7 +15,8 @@
       "id": "26a05507-0395-447a-bbbb-000000000001",
       "name": "Ethereum",
       "code": "ETH",
-      "price": "25963"
+      "price": "25963",
+      "priceUpdatedAt": "2022-04-04T01:08:35.556Z"
     }
   }
 ]

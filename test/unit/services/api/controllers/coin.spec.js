@@ -4,8 +4,6 @@ const sequelizeMockingMocha = require('sequelize-mocking').sequelizeMockingMocha
 const CoinController = require(path.join(srcDir, '/services/api/controllers/coin'));
 const DB = require(path.join(srcDir, 'modules/db'));
 const moment = require('moment');
-const axios = require('axios');
-const assert = require('assert');
 
 describe('Controller: Coin', () => {
   let sandbox = null;
@@ -22,8 +20,9 @@ describe('Controller: Coin', () => {
 
   describe('getCoinByCode', () => {
     it('should get coin by code', async () => {
-      const coinCode = 'BTC';
+      const coinCode = 'ETH';
       const coin = await CoinController.getCoinByCode(coinCode);
+      console.log(coin.updatedAt, 'ETH');
 
       expect(coin.code).to.eq(coinCode);
       expect(Object.keys(coin).length).to.eq(3);
@@ -37,35 +36,8 @@ describe('Controller: Coin', () => {
     it('updated time of returned coin should be less than one hour', async () => {
       const coinCode = 'BTC';
       const coin = await CoinController.getCoinByCode(coinCode);
-      const updatedTime = moment(new Date()).diff(coin.updatedAt, 'hours');
+      const updatedTime = moment(new Date()).diff(coin.priceUpdatedAt, 'hours');
       expect(updatedTime).to.be.lessThan(1);
-    });
-    it('it should make request if updated time exeeded one hour', async () => {
-      const coinCode = 'btc';
-      const endDate = moment().subtract(2, 'hours').format();
-      const hoursPassed = moment(new Date()).diff(endDate, 'hours');
-
-      if (hoursPassed >= 1) {
-        const stub = sinon.stub(axios, 'get').callsFake(() => Promise.resolve({ status: 200 }));
-        const test = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinCode}`);
-        console.log(test, 11111111111);
-        assert.deepEqual(test, { status: 200 }); // passes
-        assert.strictEqual(stub.callCount, 1);
-      }
-    });
-    it('it should return original coin object if updatedTime not exceeded one hour', async () => {
-      const coinCode = 'BTC';
-      const coin = await CoinController.getCoinByCode(coinCode);
-      const coinData = { price: '12345', name: 'Bitcoin', code: 'BTC' };
-
-      const coinUpdatedAt = new Date();
-      const hoursPassed = moment(new Date()).diff(coinUpdatedAt, 'hours');
-
-      if (hoursPassed < 1) {
-        expect(coin.code).to.eq(coinData.code);
-        expect(coin.name).to.eq(coinData.name);
-        expect(coin.price).to.eq(coinData.price);
-      }
     });
   });
 
@@ -82,7 +54,7 @@ describe('Controller: Coin', () => {
       expect(coin.code).to.eq(coinData.coinCode);
       expect(coin.name).to.eq(coinData.name);
       expect(coin.price).to.eq(coinData.price);
-      expect(Object.keys(coin).length).to.eq(3);
+      expect(Object.keys(coin).length).to.eq(4);
     });
 
     it('should fail add coin data', async () => {

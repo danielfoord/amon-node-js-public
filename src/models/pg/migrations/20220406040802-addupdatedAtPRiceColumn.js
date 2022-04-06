@@ -5,7 +5,7 @@ module.exports = {
     const sql = ` 
     
     ALTER TABLE "Coin"
-    ADD  COLUMN "price"  VARCHAR(255)
+    ADD COLUMN  "priceUpdatedAt"  DATETIME DEFAULT CURRENT_TIMESTAMP
     `;
 
     await transaction.sequelize.query(sql, { raw: true, transaction });
