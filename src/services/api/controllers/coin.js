@@ -12,7 +12,7 @@ const CoinController = {
 
     if (getDateDifference(coin.priceUpdatedAt) >= 1) {
       const newCoinPrice = await getCoinPrice(coin.name);
-      console.log(newCoinPrice, 333);
+
       const updatedCoin = await Models.Coin.updateCoinData(coin.id, newCoinPrice, moment());
       return updatedCoin.filterKeys(['name', 'price', 'code']);
     } else {

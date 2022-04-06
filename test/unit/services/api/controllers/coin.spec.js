@@ -22,10 +22,9 @@ describe('Controller: Coin', () => {
     it('should get coin by code', async () => {
       const coinCode = 'ETH';
       const coin = await CoinController.getCoinByCode(coinCode);
-      console.log(coin.updatedAt, 'ETH');
 
       expect(coin.code).to.eq(coinCode);
-      expect(Object.keys(coin).length).to.eq(3);
+      expect(Object.keys(coin).length).to.eq(4);
     });
 
     it('should fail get coin by code', async () => {
