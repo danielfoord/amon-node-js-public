@@ -72,3 +72,7 @@ docker-compose down
 ## Environment
 
 You can set environment variables in the `.env` file, you can find examples in .env.sample
+
+# Credits
+
+Amon Dev Team

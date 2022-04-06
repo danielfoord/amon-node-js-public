@@ -92,6 +92,11 @@ const ERRORS = [
     status: 413,
     description: 'The files you are trying to upload are too big.',
   },
+  {
+    code: 'duplicated_coin_code',
+    status: 414,
+    description: 'The property code should be unique.',
+  },
 
   // Internal
   {

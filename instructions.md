@@ -9,7 +9,8 @@ The main keys of the test are:
 
 ## Repository App Test
 
-Clone the repository [Amon NodeJS Test](https://github.com/amontech/amon-nodejs-test)
+Clone the repository [Amon NodeJS Test](https://github.com/amontech/amon-node-js-public)
+create a new pull request with your changes from test to development branch
 
 ## Goal
 
@@ -28,7 +29,7 @@ The **GET** endpoint should also return the current price of the coin which need
 
 - Create a helper to fetch the current price from [coingecko API](https://www.coingecko.com/en/api/documentation)
   the method we are interested in is (https://api.coingecko.com/api/v3/coins/:id)
-  On the existing endpoint **getCoinByCode** needs to expose the current price. The final result should be as from the example
+  On the existing endpoint **getCoin** needs to expose the current price. The final result should be as from the example
   `{name: ‘Bitcoin’, code: ‘BTC’, price: ‘42000.35’}`
 
 - To avoid get rate limited from CoinGecko store the price and the last updated time and only fetch the price again
